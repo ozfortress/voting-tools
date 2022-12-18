@@ -116,9 +116,9 @@ def create_division_report(name, teams):
     print(name.capitalize(), 'voting')
     print('=' * len(name + ' voting'))
 
-    for award, canidate_list in sorted(awards.items()):
+    for award, canidate_list in awards.items():
         print(award + ': ', end='')
-        print(*sorted(canidate_list), sep=', ', end='\n')
+        print(*canidate_list, sep=', ', end='\n')
 
     print()
 
@@ -130,7 +130,7 @@ def get_award_list(teams, designator):
     if type(class_list[0]) is list:
         class_list = [
             scout for scout_list in class_list for scout in scout_list]
-    return sorted(class_list)
+    return class_list
 
 
 def prettyprint(obj):
@@ -140,7 +140,7 @@ def prettyprint(obj):
 
 if __name__ == "__main__":
     original = sys.stdout
-    sys.stdout = open('nominations.txt', 'w', encoding='utf_8')
+    sys.stdout = open('HL-nominations.txt', 'w', encoding='utf_8')
     main()
     sys.stdout.close()
     sys.stdout = original
