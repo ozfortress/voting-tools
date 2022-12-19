@@ -140,7 +140,7 @@ def prettyprint(obj):
 
 if __name__ == "__main__":
     original = sys.stdout
-    sys.stdout = open('HL-nominations.txt', 'w', encoding='utf_8')
+    sys.stdout = open('hl-nominations.txt', 'w', encoding='utf_8')
     main()
     sys.stdout.close()
     sys.stdout = original
