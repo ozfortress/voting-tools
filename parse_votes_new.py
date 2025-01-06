@@ -41,8 +41,15 @@ def parse_votes(votes_file: TextIOWrapper):
         i+=1
         # Process each line of the votes dump.
         separator = line.split(':')
-        question = separator[0].strip()
-        response = separator[1].strip()
+        try:
+            question = separator[0].strip()
+            response = separator[1].strip()
+        except IndexError:
+            print(f'[[ERROR]]: Malformed line {i} : {line}')
+            print(f'[[FATAL]]: Correct this error before continuing.')
+            exit(1)
+
+
 
         if question == 'your team division' or question == 'division (premier/high/intermediate/main/open)':
             current_division = response
