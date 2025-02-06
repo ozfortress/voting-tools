@@ -11,9 +11,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--file', '-f', help='File to read votes from', required=True)
     parser.add_argument('--debug', '-d', help='Debug mode', action='store_true')
+    parser.add_argument('--nocap', '-c', help='Don\'t cap to 3 awards', action='store_true')
     args = parser.parse_args()
     global debug
     debug = args.debug
+    global dontcap
+    dontcap = args.nocap
     # If the file doesnt exist, exit
     rawvotes = dict()
     try:
@@ -96,7 +99,9 @@ def produce_division_report(division, voting):
                     scores[vote] = 0
                 scores[vote] += 3 - min(i,3) # 3, 2, 1, and then don't count anything after
         # sort the scores and get the top 3
-        winners = sorted(scores, key=scores.get, reverse=True)[:3]
+        winners = sorted(scores, key=scores.get, reverse=True)
+        if !nocap:
+            winners = winners[:3]
         printstring = vote_category + ': '
         for winner in winners:
             if debug:
